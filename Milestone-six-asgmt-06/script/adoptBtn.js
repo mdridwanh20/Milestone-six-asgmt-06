@@ -18,16 +18,13 @@ const displayCategoriesBtn = (pets) => {
     
         <div class="flex justify-center">
             <button
+                onclick="loadCardOnClick('${pet.category}')"
                 class="border btn px-8 py-2 rounded-md hover:bg-[#0E7A811A]">${pet.category}
             </button>
         </div>
-
-    
-    
-    `
+    `;
 
     adoptCtnContainer.append(divBtn)
-
 
    });
 
