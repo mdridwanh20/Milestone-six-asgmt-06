@@ -6,13 +6,14 @@ const showButtonCategory = async () => {
     
 }
 
-
 // button create function here;
 const displayCategoriesBtn = (pets) => {
 
+    // card container
     const adoptCtnContainer = document.getElementById('adopt-btn-container')
     pets.forEach((pet) => {
-       
+    
+    // dynamic button create
     const divBtn = document.createElement('div')
     divBtn.innerHTML = `
     
@@ -29,7 +30,6 @@ const displayCategoriesBtn = (pets) => {
    });
 
 };
-
 
 
 
