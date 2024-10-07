@@ -6,6 +6,7 @@ const showButtonCategory = async () => {
     
 }
 
+
 // button create function here;
 const displayCategoriesBtn = (pets) => {
 
@@ -20,17 +21,23 @@ const displayCategoriesBtn = (pets) => {
         <div class="flex justify-center">
             <button
                 onclick="loadCardOnClick('${pet.category}')"
-                class="border btn px-8 py-2 rounded-md hover:bg-[#0E7A811A]">${pet.category}
+                class="border petBtn btn px-8 py-2 rounded-md hover:bg-[#0E7A811A]">${pet.category}
             </button>
         </div>
     `;
-
     adoptCtnContainer.append(divBtn)
 
    });
 
 };
 
+// const removeClassButton = () => {
+//     const buttons = document.getElementsByClassName('petBtn')
+//     for (let btn of buttons){
+//         btn.
+//     }
+    
+// }
 
 
 

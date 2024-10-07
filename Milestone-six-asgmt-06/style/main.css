@@ -2,3 +2,7 @@
 .brand-color{
     color: #0E7A81;
 }
+.active{
+    background-color: red;
+    color: white;
+}
