@@ -117,6 +117,7 @@ const loadCardOnClick = async (id) => {
                             src="${card.image}"
                             alt="Shoes" />
                         </figure>
+
                         <div class="my-4">
                             <h2 class="card-title">${card.pet_name}</h2>
                             <p class="">Breed: ${card.breed}</p>
@@ -165,23 +166,23 @@ loadCardOnClick()
     }
 
 // adopt btn here
-    const adoptBtn = () => {
-        document.getElementById('my_modal_3').showModal();
+    // const adoptBtn = () => {
+    //     document.getElementById('my_modal_3').showModal();
         
-            let sec = 5;
-            setInterval(function() {
-                if(sec >0 ){
-                    sec--;
-                }
+    //         let sec = 5;
+    //         setInterval(function() {
+    //             if(sec >0 ){
+    //                 sec--;
+    //             }
           
-              if (sec == 0) {
-                document.getElementById('my_modal_3').close();
-              } else{
-                document.getElementById("contentContainer").innerHTML = sec;
+    //           if (sec == 0) {
+    //             document.getElementById('my_modal_3').close();
+    //           } else{
+    //             document.getElementById("contentContainer").innerHTML = sec;
                 
-              }
-            }, 1000);
-    }
+    //           }
+    //         }, 1000);
+    // }
 
 // details 
         const detailsBtn = async (id) => {
@@ -190,14 +191,42 @@ loadCardOnClick()
             detailsBtnShowModal(data.petData);
         }
 
+        //const {petId, category, date_of_birth, 
+        //price, image, gender, pet_details, vaccinated_status, pet_name } = modals;
+
         const detailsBtnShowModal = (modals) => {
             console.log(modals);
             document.getElementById('my_modal_3').showModal();
         
             const contentContainer = document.getElementById('contentContainer')
+            contentContainer.innerHTML = " ";
             const div = document.createElement('div')
             div.innerHTML = `
-                ${modals.category}
+
+                <div class="pt-5 pb-1  ">
+                    <img class="w-full"src="${modals.image}" alt="" />
+
+                    <div class="my-4 border-b-2">
+                            <h2 class="card-title">${modals.pet_name}</h2>
+                            <p class=""> <span class="font-semibold"> Birth </span> : ${modals.date_of_birth}</p>
+                            <p class=""> <span class="font-semibold"> Gender </span> : ${modals.gender}</p>
+                            <p class=""> <span class="font-semibold"> Price </span> : ${modals.price}</p>
+                    </div>
+
+                    <div>
+                        <p class=""> <span class="font-semibold"> Details Information </span> : <br> ${modals.pet_details}</p>
+
+                           <div class="flex justify-center items-center border-1 border-[#0E7A81] rounded-md mt-4 bg-[#0E7A811A]">
+                             <form method="dialog">
+                                <button class="petBtn px-8 py-2 font-semibold text-[#0E7A81]  ">Cancel</button>
+                            </form>
+                           </div>
+
+                    </div>
+
+                </div>
+
+
             `;
             contentContainer.appendChild(div);
         }
