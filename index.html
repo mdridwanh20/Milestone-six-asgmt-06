@@ -133,30 +133,56 @@
 
 
 <!-- all card container -->
-         <div 
-         id="card-container"
-         class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 card-container my-6">
+         <div class=" grid grid-cols-1 lg:grid-cols-4 gap-6 m-5 bg-amber-100">
 
-         
-        </div>
-        
-
-         <!-- <dialog id="videoModal" class="modal modal-bottom sm:modal-middle ">
-            <div class="modal-box p-10 flex items-center">
-  
-              <div id="modelContent">
-                    <img src="${}" alt="">
-                    <p></p>
-              </div>
-  
-              <div class="modal-action">
-                <form method="dialog">
-                  <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                </form>
-              </div>
-  
+            <div class="lg:col-span-3">
+                <div 
+                    id="card-container"
+                    class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 card-container my-6">
+                </div>
             </div>
-          </dialog> -->
+
+
+            <div class="lg:col-span-1 border border-black">
+
+                <div class="grid grid-cols-2 gap-4 ">
+                    <div class="border">
+                        <h3>Lorem ipsum dolor sit amet.</h3>
+                        <p>Lorem ipsum dolor sit amet.</p>
+
+                    </div>
+
+                    <div class="border">
+                        <h3>Lorem ipsum dolor sit amet.</h3>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+         </div>
+
+
+         <div class="modal-container">
+            <!-- <button class="btn" onclick="my_modal_3.showModal()">open modal</button> -->
+            <dialog id="my_modal_3" class="modal">
+                
+                        <div class="modal-box">
+
+                            <form method="dialog">
+                            <button 
+                            onclick=""
+                            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                            <div id="contentContainer">
+
+                            </div>
+                        </div>
+            </dialog>
+         </div>
+
+
 
 
  </main>
@@ -208,12 +234,8 @@
  <!-- flowbite script link here -->
 
  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
- <script src="./Milestone-six-asgmt-06/script/all_card.js"></script>
- <script src="./Milestone-six-asgmt-06/script/adoptBtn.js"></script>
- <script src="./Milestone-six-asgmt-06/script/card.js"></script>
-<script src="./Milestone-six-asgmt-06/script/all_card.js"></script>
- <script src="./Milestone-six-asgmt-06/script/default_card.js"></script>
-<script src="./Milestone-six-asgmt-06/script/detailsBtn.js"></script>
+<script src="./Milestone-six-asgmt-06/script/app.js"></script>
+
 
 
 </body>
