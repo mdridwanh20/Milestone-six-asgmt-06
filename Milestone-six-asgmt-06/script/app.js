@@ -1,112 +1,162 @@
 
-// =======================================================================// * dynamic button create here>;
+
+//////////////////////////// * dynamic button ;
+//////////////////////////// * click =========> cat, dog, rabbit, bird
+
 
 const showButtonCategory = async () => {
     const res = await fetch(`https://openapi.programming-hero.com/api/peddy/categories`)
     const Data = await res.json()
+    console.log(Data.categories);
     displayCategoriesBtn(Data.categories);
 }
 
-            const displayCategoriesBtn = (pets) => {
+    const displayCategoriesBtn = (pets) => {
+    // card container
+    const adoptCtnContainer = document.getElementById('adopt-btn-container')
+    pets.forEach((pet) => {
+    console.log(pet);
+        
+        // dynamic button create
+        const divBtn = document.createElement('div')
+        divBtn.innerHTML = `
 
-                // card container
-                const adoptCtnContainer = document.getElementById('adopt-btn-container')
-                pets.forEach((pet) => {
-                
-                // dynamic button create
-                const divBtn = document.createElement('div')
-                divBtn.innerHTML = `
-                
-                    <div class="flex justify-center">
-                        <button
-                            onclick="loadCardOnClick('${pet.category}')"
-                            class="border petBtn btn px-8 py-2 rounded-md hover:bg-[#0E7A811A]">${pet.category}
-                        </button>
-                    </div>
-                `;
-                adoptCtnContainer.append(divBtn)
+        <div class="flex justify-center">
+            <button
 
-            });
+                onclick="loadCardOnClick('${pet.category}')"
+                class="border petBtn btn px-8 py-2 rounded-md hover:bg-[#0E7A811A]">
+                <img class="w-6"src="${pet.category_icon}"/>${pet.category}
 
-            };
+            </button>
+        </div>
+        `;
+        adoptCtnContainer.append(divBtn)
 
-            showButtonCategory()
+    });
+};
+
+showButtonCategory()
 
 
 
+ ///////////////////// * default all card ///////////////////////////////
+ //////////////////// * (innerHtml = card > with ternary use in the card )
+ //////////////////// * innerHtml = card > with ternary use in the card
+ //////////////////// * innerHtml = card inside button > like, adopt , details.
 
 
-// default all card ================================================================ //* default all card==>
 
-const PetsCard = async() => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pets`)
-    const data = await res.json()
-    // console.log(data.pets);
-    displayAllPetsCard(data.pets);
-}
-
-        const displayAllPetsCard = (items) => {
-            const cardContainer = document.getElementById('card-container');
-
-            items.forEach(item => {
+    const PetsCard = async() => {
+        const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pets`)
+        const data = await res.json()
+        // console.log(data.pets);
+        displayAllPetsCard(data.pets);
+    }
+    
+         const displayAllPetsCard = (items) => {
+                const cardContainer = document.getElementById('card-container');
+                items.forEach(item => {
                 // console.log(item);
-
+        
                 const allCardDiv = document.createElement('div')
                 allCardDiv.innerHTML = `
-
+        
                     <div class=" rounded-md border bg-base-100 p-4">
-                    <figure>
-                        <img class="w-full"
-                        src="${item.image}"
-                        alt="Shoes" />
-                    </figure>
-                    <div class="my-4">
-                        <h2 class="card-title">${item.pet_name}</h2>
-                        <p class="">Breed: ${item.breed}</p>
-                        <p class="">Birth: ${item.date_of_birth}</p>
-                        <p class="">Gender: ${item.gender}</p>
-                        <p class="">Price: ${item.price}</p>
+                            <figure>
+                                <img class="w-full"
+                                src="${item.image}"
+                                alt="Shoes" />
+                            </figure>
+                            
+                        <div class="my-4">
+    
+                                    ${item.pet_name === null || item.pet_name === undefined ? 'Not available:' :
+                                    `<h2 class="card-title">${item.pet_name}</h2>`}
+    
+                                    ${item.breed === null || item.breed === undefined ? 'Not available:' :
+                                    `<p class="flex items-center"> 
+                                        <i class='text-xl pr-2 bx bx-grid-small'></i>
+                                        Breed: ${item.breed}</p>`}
+    
+                                        ${item.date_of_birth === null || item.date_of_birth === undefined ? 'Not available:' :
+                                    `<p class="flex items-center">
+                                        <i class='text-xl pr-2 bx bxs-bookmark-star'></i> 
+                                        Birth: ${item.date_of_birth}</p>`}
+                                        
+                                    ${item.gender === null || item.gender === undefined ? 'Not available:' :
+                                    `<p class="flex items-center">
+                                        <i class='text-xl pr-2 bx bx-female-sign'></i>
+                                        Gender: ${item.gender}</p>`}
+    
+                                    ${item.price === null || item.price === undefined ? 'Not available:' :
+                                    `<p class="flex items-center"> 
+                                        <i class='text-xl pr-2 bx bx-money-withdraw'></i>
+                                        Price: ${item.price}</p>`}
                     </div>
-
-                    <div class="card-actions flex justify-between">
-
-                        <button
-                        onclick="likeBtn(like)"
-                        class="border font-semibold py-1 text-[#0E7A81] px-3 rounded-md">like</button>
-
-                        <button 
-                        onclick="adoptBtn()"
-                        class="border font-semibold py-1 text-[#0E7A81] px-3 rounded-md">Adopt</button>
-
-                        <button 
-                        onclick="detailsBtn('${item.petId}')"
-                        class="border font-semibold py-1 text-[#0E7A81] px-3 rounded-md">Details</button>
+    
+                        <div class="card-actions flex justify-between">
+                            <button
+                            onclick="likeBtn('${item.image}')"
+                            class="border font-semibold py-1 text-[#0E7A81] px-3 rounded-md">like</button>
+    
+                            <button 
+                            onclick="adoptBtn()"
+                            class="border font-semibold py-1 text-[#0E7A81] px-3 rounded-md">Adopt</button>
+    
+                            <button 
+                            onclick="detailsBtn('${item.petId}')"
+                            class="border font-semibold py-1 text-[#0E7A81] px-3 rounded-md">Details</button>
+                        </div>
+                        
                     </div>
-                </div>
-                `;
-                cardContainer.append(allCardDiv)
-            });
-
-        }
-
-        PetsCard()
-
-
+                    `;
+                        cardContainer.append(allCardDiv)
+                    });
+        
+                }
+PetsCard()
+        
+        
 
 
-// card category here by button ====================================================> //* (dog, cat, rabbit, bird )
+
+//*///////// ( card ====> click > dog, cat, rabbit, bird ) /////////////
+////////////////////////////////////////////// * undefine data = condition 
+////////////////////////////////////////////// * innerHtml = card > with ternary use in the card
+////////////////////////////////////////////// * card inside button > like, adopt , details.
+
 
 const loadCardOnClick = async (id) => {
     // alert(card)
     const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
     const data = await res.json()
-    // console.log(data.pets);
     showAllCard(data.data)
 }
         const showAllCard = (cards) => {
             const cardContainer = document.getElementById('card-container')
-        
             cardContainer.innerHTML = "";
+
+        // undefine data condition:                                                  // problem : undefine content.
+           if(cards.length === 0){
+                cardContainer.classList.remove('grid')
+                cardContainer.innerHTML = `
+                
+                    <div class="w-full lg:w-10/12 m-auto flex flex-col h-[400px] items-center justify-center">
+
+                        <img src="./images/error.webp" alt="">
+                        <h2 class="font-bold text-3xl">No Information Available </h2>
+                        <p class="text-center py-2">It is a long established fact that a reader will be distracted by the readable content of a page when looking at 
+                            its layout. The point of using Lorem Ipsum is that it has a.</p>
+                    </div>
+                `;
+                return;
+
+           } else{
+                cardContainer.classList.add('grid')
+           }
+
+
             cards.forEach(card => {
             const cardDiv = document.createElement('div')
             cardDiv.innerHTML = `
@@ -118,12 +168,34 @@ const loadCardOnClick = async (id) => {
                             alt="Shoes" />
                         </figure>
 
-                        <div class="my-4">
-                            <h2 class="card-title">${card.pet_name}</h2>
-                            <p class="">Breed: ${card.breed}</p>
-                            <p class="">Birth: ${card.date_of_birth}</p>
-                            <p class="">Gender: ${card.gender}</p>
-                            <p class="">Price: ${card.price}</p>
+                       <div class="my-4">
+
+                                ${card.pet_name === null || card.pet_name === undefined ? 'Not available:' :
+                                `<h2 class="card-title">${card.pet_name}</h2>`}
+
+
+                                ${card.breed === null || card.breed === undefined ? 'Not available:' :
+                                `<p class="flex items-center"> 
+                                    <i class='text-xl pr-2 bx bx-grid-small'></i>
+                                    Breed: ${card.breed}</p>`}
+
+
+                                 ${card.date_of_birth === null || card.date_of_birth === undefined ? 'Not available:' :
+                                `<p class="flex items-center">
+                                    <i class='text-xl pr-2 bx bxs-bookmark-star'></i> 
+                                    Birth: ${card.date_of_birth}</p>`}
+
+                                    
+                                ${card.gender === null || card.gender === undefined ? 'Not available:' :
+                                `<p class="flex items-center">
+                                    <i class='text-xl pr-2 bx bx-female-sign'></i>
+                                    Gender: ${card.gender}</p>`}
+
+                                ${card.price === null || card.price === undefined ? 'Not available:' :
+                                `<p class="flex items-center"> 
+                                    <i class='text-xl pr-2 bx bx-money-withdraw'></i>
+                                    Price: ${card.price}</p>`}
+
                         </div>
         
                         <div class="card-actions flex justify-between">
@@ -144,10 +216,8 @@ const loadCardOnClick = async (id) => {
             `;
             cardContainer.append(cardDiv)
         
-        });
-        }
-
-
+    });
+}
 loadCardOnClick()
 
 
@@ -156,14 +226,26 @@ loadCardOnClick()
 
 
 
-
-
-// card inside button =================================================================> // * (like, adopt, details)
+//*////////////////////// card inside ///////////////////////////////
+/////////////////////////////////////////////////////// * like function 
+/////////////////////////////////////////////////////// * adopt function  with modals
+/////////////////////////////////////////////////////// * details function  with modals
 
 // like btn here
     const likeBtn = (like) => {
         console.log(like);
+        
+        // like container;
+        const likeImageContainer = document.getElementById('likeImageContainer');
+
+        const likeDiv = document.createElement('div')
+        likeDiv.innerHTML = `
+            <img class="rounded-sm" src="${like}"/>
+        `;
+        
+        likeImageContainer.append(likeDiv);
     }
+
 
 // adopt btn here
     // const adoptBtn = () => {
@@ -184,13 +266,16 @@ loadCardOnClick()
     //         }, 1000);
     // }
 
-// details 
-        const detailsBtn = async (id) => {
-            const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
-            const data = await res.json()
-            detailsBtnShowModal(data.petData);
-        }
+ 
 
+
+
+// details modals here.
+    const detailsBtn = async (id) => {
+        const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
+        const data = await res.json()
+        detailsBtnShowModal(data.petData);
+    }
         //const {petId, category, date_of_birth, 
         //price, image, gender, pet_details, vaccinated_status, pet_name } = modals;
 
@@ -198,8 +283,9 @@ loadCardOnClick()
             console.log(modals);
             document.getElementById('my_modal_3').showModal();
         
-            const contentContainer = document.getElementById('contentContainer')
-            contentContainer.innerHTML = " ";
+
+            const modalContentContainer = document.getElementById('modalContentContainer')
+            modalContentContainer.innerHTML = " ";
             const div = document.createElement('div')
             div.innerHTML = `
 
@@ -207,10 +293,37 @@ loadCardOnClick()
                     <img class="w-full"src="${modals.image}" alt="" />
 
                     <div class="my-4 border-b-2">
-                            <h2 class="card-title">${modals.pet_name}</h2>
-                            <p class=""> <span class="font-semibold"> Birth </span> : ${modals.date_of_birth}</p>
-                            <p class=""> <span class="font-semibold"> Gender </span> : ${modals.gender}</p>
-                            <p class=""> <span class="font-semibold"> Price </span> : ${modals.price}</p>
+                        <h2 class="card-title">${modals.pet_name}</h2>
+
+                                ${modals.breed === null || modals.breed === undefined ? 'Not available:' : 
+                                `<p class="flex items-center"> 
+                                    <i class='text-xl pr-2 bx bx-grid-small'></i>
+                                    Breed: ${modals.breed}</p>` }  
+                                
+                                
+                                ${modals.date_of_birth === null || modals.date_of_birth === undefined ? 'Not available:' : 
+                                `<p class="flex items-center">
+                                    <i class='text-xl pr-2 bx bxs-bookmark-star'></i> 
+                                    Birth: ${modals.date_of_birth}</p>`}
+
+
+                                ${modals.gender === null || modals.gender === undefined ? 'Not available:' :
+                                `<p class="flex items-center">
+                                    <i class='text-xl pr-2 bx bx-female-sign'></i>
+                                    Gender: ${modals.gender}</p>`}
+                                
+
+                                ${modals.vaccinated_status === null || modals.vaccinated_status === undefined ? 'Not available:' :
+                                `<p class="flex items-center">
+                                    <i class='text-xl pr-2 bx bx-move'></i>
+                                    vaccinated_status: ${modals.vaccinated_status}</p>`}
+
+
+                                ${modals.vaccinated_status === null || modals.vaccinated_status === undefined ? 'Not available:' :
+                                `<p class="flex items-center"> 
+                                    <i class='text-xl pr-2 bx bx-money-withdraw'></i>
+                                    Price: ${modals.price}</p>`}
+
                     </div>
 
                     <div>
@@ -228,7 +341,7 @@ loadCardOnClick()
 
 
             `;
-            contentContainer.appendChild(div);
-        }
+        modalContentContainer.appendChild(div);
+}
 
 

@@ -14,6 +14,8 @@
     <!-- tailwind cdn link here -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <!-- main css link here -->
      <link rel="stylesheet" href="./style/main.css">
 </head>
@@ -26,7 +28,7 @@
         <nav class="container m-auto">
             <div class=" flex flex-wrap items-center justify-between p-4">
             <a href=""class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="./Milestone-six-asgmt-06/images/logo.webp" />
+                <img src="./images/logo.webp" />
                 <span class="self-center text-2xl font-bold whitespace-nowrap dark:text-white">Peddy</span>
             </a>
 
@@ -35,7 +37,7 @@
                 <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
 
                 <span class="sr-only">Open user menu</span>
-                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+                <img class="w-8 h-8 rounded-full" src="./images/logo.webp" alt="user photo">
                 </button>
 
                 <!-- Dropdown menu -->
@@ -74,6 +76,7 @@
 
             </div>
 
+            
 <!-- * MENU ITEM HERE -->
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
             <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -124,7 +127,8 @@
             </div>
          </div>
 
-<!-- button click here -->
+
+<!-- dynamic button create  -->
          <div 
          id="adopt-btn-container"
          class="grid grid-cols-2 justify-evenly gap-8 lg:grid-cols-4 my-10  ">
@@ -133,28 +137,30 @@
 
 
 <!-- all card container -->
-         <div class=" grid grid-cols-1 lg:grid-cols-4 gap-6 m-5 bg-amber-100">
+         <div class=" grid grid-cols-1 lg:grid-cols-4 gap-6 border ">
 
-            <div class="lg:col-span-3">
+            <div class="lg:col-span-3 ">
                 <div 
                     id="card-container"
-                    class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 card-container my-6">
+                    class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  my-6">
                 </div>
             </div>
 
 
-            <div class="lg:col-span-1 border border-black">
+            <div class="lg:col-span-1  border">
 
-                <div class="grid grid-cols-2 gap-4 ">
-                    <div class="border">
-                        <h3>Lorem ipsum dolor sit amet.</h3>
-                        <p>Lorem ipsum dolor sit amet.</p>
+<!-- like image container -->
+                <div 
+                id="likeImageContainer"
+                class="grid grid-cols-2  my-1 gap-5 ">
+                
+                    <div class="border-1 border-black">
+                        
 
                     </div>
 
-                    <div class="border">
-                        <h3>Lorem ipsum dolor sit amet.</h3>
-                        <p>Lorem ipsum dolor sit amet.</p>
+                    <div class="border-1 border-black">
+                        
                     </div>
                 </div>
 
@@ -164,26 +170,29 @@
          </div>
 
 
+
+<!-- modal container -->
          <div class="modal-container">
             <!-- <button class="btn" onclick="my_modal_3.showModal()">open modal</button> -->
             <dialog id="my_modal_3" class="modal">
-                
                         <div class="modal-box">
-
                             <form method="dialog">
                                 <button 
                                 class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕
                                 </button>
                             </form>
 
-                            <div id="contentContainer">
-
+                            <div id="modalContentContainer">
                             </div>
+
                         </div>
             </dialog>
          </div>
 
-
+         
+         <!-- <i class='bx bxs-coffee-bean'></i> -->
+         
+        
 
 
  </main>
@@ -195,7 +204,7 @@
         <div class="flex flex-col">
             <div class="">
                 <a class=" flex items-center font-bold text-xl" href="">
-                    <img class="pr-2" src="./Milestone-six-asgmt-06/images/logo.webp" alt="">Peddy
+                    <img class="pr-2" src="./images/logo.webp" alt="">Peddy
                 </a>
             </div>
         </div>
@@ -234,9 +243,11 @@
 
  <!-- flowbite script link here -->
 
- <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 <script src="./Milestone-six-asgmt-06/script/app.js"></script>
-
+<script src="./Milestone-six-asgmt-06/script/dynamic_btn.js"></script>
+<script src="./Milestone-six-asgmt-06/script/default.js"></script>
+<script src="./Milestone-six-asgmt-06/script/Btn_card.js"></script>
 
 
 </body>
