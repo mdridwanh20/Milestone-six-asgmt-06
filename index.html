@@ -119,7 +119,11 @@
 
 
  <main class="container m-auto px-4">
-        <!-- tittle section here -->
+
+
+
+
+<!--* tittle section here -->
          <div>
             <div class=" px-4 text-center flex flex-col items-center py-5">
                 <h1 class=" font-bold text-3xl">Adopt  Your  Best Friend</h1>
@@ -127,8 +131,17 @@
             </div>
          </div>
 
+<!-- * sort by Price -->
+         <div class="flex items-center justify-between py-5">
+            <h1 class="text-[#0E7A81] font-bold text-2xl capitalize">best deal for you</h1>
 
-<!-- dynamic button create  -->
+            <button
+            onclick="sortPriceBtn()"
+            class="bg-[#0E7A81] cursor-pointer px-4 py-2 text-lg font-semibold rounded-md text-white">Sort by price</button>
+         </div>
+    
+
+<!--* dynamic button create  -->
          <div 
          id="adopt-btn-container"
          class="grid grid-cols-2 justify-evenly gap-8 lg:grid-cols-4 my-10  ">
@@ -136,63 +149,96 @@
          </div>
 
 
-<!-- all card container -->
-         <div class=" grid grid-cols-1 lg:grid-cols-4 gap-6 border ">
+<!--=========== spinner -->
 
-            <div class="lg:col-span-3 ">
-                <div 
-                    id="card-container"
-                    class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  my-6">
+        <div class="flex items-center justify-center">
+            <div id="spinner" class="hidden ">
+                <span class="loading loading-bars loading-lg"></span>
+            </div>
+        </div>
+
+
+<!--* all card container -->
+
+         <div
+         id="main-container">
+
+            <div
+            class="grid grid-cols-1 lg:grid-cols-4 gap-6  ">
+                <div class="lg:col-span-3 ">
+                    <div 
+                        id="card-container"
+                        class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  my-6">
+                    </div>
                 </div>
+
+
+                <div class="lg:col-span-1 ">
+
+    <!-- like image container -->
+                    <div 
+                    id="likeImageContainer"
+                    class="grid grid-cols-2  my-1 gap-5 ">
+                    
+                        <div class="border-1 border-black">
+                            
+
+                        </div>
+
+                        <div class="border-1 border-black">
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+
             </div>
 
+        </div>
 
-            <div class="lg:col-span-1  border">
+<!--* adopt modals here -->
+        <!-- <button class="btn" onclick="my_modal_2.showModal()">open modal</button> -->
 
-<!-- like image container -->
-                <div 
-                id="likeImageContainer"
-                class="grid grid-cols-2  my-1 gap-5 ">
+        <div class="">
+            <dialog id="my_modal_2" class="modal">
                 
-                    <div class="border-1 border-black">
-                        
+                <div class="flex justify-center items-center flex-col py-10">
 
+                    <!-- <form method="dialog" class="modal-backdrop">
+                        <button>close</button>
+                    </form>  -->
+
+                    <div id="adoptModal">
+                        
                     </div>
 
-                    <div class="border-1 border-black">
-                        
-                    </div>
                 </div>
-
-            </div>
-
-
-         </div>
-
+                
+    
+            </dialog>    
+        </div>
 
 
-<!-- modal container -->
+
+<!--* details modal container -->
          <div class="modal-container">
             <!-- <button class="btn" onclick="my_modal_3.showModal()">open modal</button> -->
             <dialog id="my_modal_3" class="modal">
                         <div class="modal-box">
+
                             <form method="dialog">
                                 <button 
                                 class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕
                                 </button>
                             </form>
 
-                            <div id="modalContentContainer">
+                            <div id="detailsModalContainer">
                             </div>
 
                         </div>
             </dialog>
          </div>
-
-         
-         <!-- <i class='bx bxs-coffee-bean'></i> -->
-         
-        
 
 
  </main>

@@ -3,11 +3,11 @@
 //////////////////////////// * dynamic button ;
 //////////////////////////// * click =========> cat, dog, rabbit, bird
 
-
 const showButtonCategory = async () => {
+
     const res = await fetch(`https://openapi.programming-hero.com/api/peddy/categories`)
     const Data = await res.json()
-    console.log(Data.categories);
+    // console.log(Data.categories);
     displayCategoriesBtn(Data.categories);
 }
 
@@ -15,7 +15,9 @@ const showButtonCategory = async () => {
     // card container
     const adoptCtnContainer = document.getElementById('adopt-btn-container')
     pets.forEach((pet) => {
-    console.log(pet);
+    // console.log(pet);
+       
+    
         
         // dynamic button create
         const divBtn = document.createElement('div')
@@ -23,28 +25,37 @@ const showButtonCategory = async () => {
 
         <div class="flex justify-center">
             <button
-
                 onclick="loadCardOnClick('${pet.category}')"
                 class="border petBtn btn px-8 py-2 rounded-md hover:bg-[#0E7A811A]">
                 <img class="w-6"src="${pet.category_icon}"/>${pet.category}
-
             </button>
         </div>
         `;
         adoptCtnContainer.append(divBtn)
 
     });
-};
 
+
+};
 showButtonCategory()
 
 
 
- ///////////////////// * default all card ///////////////////////////////
+
+ //////////////////// * Sort by price button ////////////////////////////
+//  const sortPriceBtn = async (id)  => {
+//     const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pets`)
+//     const data = await res.json();
+//     console.log(data.pets);
+//  }
+
+
+
+
+ //////////////////// * default all card ///////////////////////////////
  //////////////////// * (innerHtml = card > with ternary use in the card )
  //////////////////// * innerHtml = card > with ternary use in the card
  //////////////////// * innerHtml = card inside button > like, adopt , details.
-
 
 
     const PetsCard = async() => {
@@ -54,11 +65,24 @@ showButtonCategory()
         displayAllPetsCard(data.pets);
     }
     
-         const displayAllPetsCard = (items) => {
-                const cardContainer = document.getElementById('card-container');
-                items.forEach(item => {
-                // console.log(item);
-        
+    const displayAllPetsCard = (items) => {
+            const cardContainer = document.getElementById('card-container');
+            
+    // problem here: 
+              // sort by button;
+            //   const petId = [
+            //     {name: "pet_name"},
+            //     {price:  1200},
+            //  ];
+             
+            //  petId.sort((a, b) => a.name - b.price)
+             
+
+            cardContainer.innerHTML = "";
+            items.forEach(item => {
+            // console.log(item);
+
+            
                 const allCardDiv = document.createElement('div')
                 allCardDiv.innerHTML = `
         
@@ -98,7 +122,7 @@ showButtonCategory()
                         <div class="card-actions flex justify-between">
                             <button
                             onclick="likeBtn('${item.image}')"
-                            class="border font-semibold py-1 text-[#0E7A81] px-3 rounded-md">like</button>
+                            class="border font-semibold py-1 text-[#0E7A81] px-3 rounded-md"><i class='bx bx-like'></i></button>
     
                             <button 
                             onclick="adoptBtn()"
@@ -113,8 +137,7 @@ showButtonCategory()
                     `;
                         cardContainer.append(allCardDiv)
                     });
-        
-                }
+            }
 PetsCard()
         
         
@@ -122,13 +145,27 @@ PetsCard()
 
 
 //*///////// ( card ====> click > dog, cat, rabbit, bird ) /////////////
+////////////////////////////////////////////// * * spinner.
 ////////////////////////////////////////////// * undefine data = condition 
 ////////////////////////////////////////////// * innerHtml = card > with ternary use in the card
 ////////////////////////////////////////////// * card inside button > like, adopt , details.
 
 
 const loadCardOnClick = async (id) => {
-    // alert(card)
+    const spinner = document.getElementById('spinner');
+    const mainContainer = document.getElementById('main-container');
+
+    spinner.classList.remove('hidden')
+    mainContainer.classList.add('hidden')
+
+
+    setTimeout(() => {
+        spinner.classList.add('hidden')
+        mainContainer.classList.remove('hidden')
+
+    }, 1000);
+
+    
     const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
     const data = await res.json()
     showAllCard(data.data)
@@ -143,17 +180,18 @@ const loadCardOnClick = async (id) => {
                 cardContainer.innerHTML = `
                 
                     <div class="w-full lg:w-10/12 m-auto flex flex-col h-[400px] items-center justify-center">
-
                         <img src="./images/error.webp" alt="">
                         <h2 class="font-bold text-3xl">No Information Available </h2>
                         <p class="text-center py-2">It is a long established fact that a reader will be distracted by the readable content of a page when looking at 
-                            its layout. The point of using Lorem Ipsum is that it has a.</p>
+                        its layout. The point of using Lorem Ipsum is that it has a.</p>
+
                     </div>
                 `;
                 return;
 
            } else{
                 cardContainer.classList.add('grid')
+                cardContainer.innerHTML = "";
            }
 
 
@@ -202,7 +240,7 @@ const loadCardOnClick = async (id) => {
         
                             <button 
                             onclick="likeBtn('${card.image}')"
-                            class="border font-semibold py-1 text-[#0E7A81] px-3 rounded-md">like</button>
+                            class="border font-semibold py-1 text-[#0E7A81] px-3 rounded-md"><i class='bx bx-like'></i></button>
         
                             <button 
                             onclick="adoptBtn()"
@@ -218,7 +256,7 @@ const loadCardOnClick = async (id) => {
         
     });
 }
-loadCardOnClick()
+// loadCardOnClick()
 
 
 
@@ -240,34 +278,45 @@ loadCardOnClick()
 
         const likeDiv = document.createElement('div')
         likeDiv.innerHTML = `
-            <img class="rounded-sm" src="${like}"/>
+            <img class="p-2 border rounded-md" src="${like}"/>
         `;
         
         likeImageContainer.append(likeDiv);
     }
 
 
-// adopt btn here
-    // const adoptBtn = () => {
-    //     document.getElementById('my_modal_3').showModal();
+
+// * adopt Button here.
+    // let num = 0 ;
+    // const timeOut = setInterval(() => {
+    //     num++;
         
-    //         let sec = 5;
-    //         setInterval(function() {
-    //             if(sec >0 ){
-    //                 sec--;
-    //             }
-          
-    //           if (sec == 0) {
-    //             document.getElementById('my_modal_3').close();
-    //           } else{
-    //             document.getElementById("contentContainer").innerHTML = sec;
-                
-    //           }
-    //         }, 1000);
-    // }
+    //     if(timeOut > 5){
+    //         clearInterval(timeOut)
+    //     }
+    // }, 1000)
+
+
+    // const adoptBtn = () =>{
+
+    //     document.getElementById('my_modal_2').showModal();
+    //     const adoptContainer = document.getElementById('adoptModal');
+
+    //     const adoptDiv = document.createElement('div');
+    //     adoptDiv.innerHTML = `
+        
+    //             <div class="modal-box flex justify-center items-center flex-col p-10">
+    //                 <h3 class="text-2xl font-bold">Congrats</h3>
+    //                 <p class="py-1 capitalize text-center">adoption process is start for your pet</p>
+                    
+    //             </div>
+    //     `;
+    //     adoptContainer.appendChild(adoptDiv);
+        
+    // } 
 
  
-
+ 
 
 
 // details modals here.
@@ -283,9 +332,8 @@ loadCardOnClick()
             console.log(modals);
             document.getElementById('my_modal_3').showModal();
         
-
-            const modalContentContainer = document.getElementById('modalContentContainer')
-            modalContentContainer.innerHTML = " ";
+            const detailsModalContainer = document.getElementById('detailsModalContainer')
+            detailsModalContainer.innerHTML = " ";
             const div = document.createElement('div')
             div.innerHTML = `
 
@@ -328,7 +376,6 @@ loadCardOnClick()
 
                     <div>
                         <p class=""> <span class="font-semibold"> Details Information </span> : <br> ${modals.pet_details}</p>
-
                            <div class="flex justify-center items-center border-1 border-[#0E7A81] rounded-md mt-4 bg-[#0E7A811A]">
                              <form method="dialog">
                                 <button class="petBtn px-8 py-2 font-semibold text-[#0E7A81]  ">Cancel</button>
@@ -341,7 +388,8 @@ loadCardOnClick()
 
 
             `;
-        modalContentContainer.appendChild(div);
+
+        detailsModalContainer.appendChild(div);
 }
 
 
