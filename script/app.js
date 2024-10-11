@@ -1,32 +1,29 @@
-
-
 //////////////////////////// * dynamic button ;
 //////////////////////////// * click =========> cat, dog, rabbit, bird
 
 const showButtonCategory = async () => {
-
     const res = await fetch(`https://openapi.programming-hero.com/api/peddy/categories`)
     const Data = await res.json()
     // console.log(Data.categories);
     displayCategoriesBtn(Data.categories);
 }
 
-    const displayCategoriesBtn = (pets) => {
+
+const displayCategoriesBtn = (pets) => {
     // card container
     const adoptCtnContainer = document.getElementById('adopt-btn-container')
     pets.forEach((pet) => {
     // console.log(pet);
-       
-    
-        
+
         // dynamic button create
         const divBtn = document.createElement('div')
         divBtn.innerHTML = `
 
         <div class="flex justify-center">
             <button
+                id="btn-${pet.category}"
                 onclick="loadCardOnClick('${pet.category}')"
-                class="border petBtn btn px-8 py-2 rounded-md hover:bg-[#0E7A811A]">
+                class="border petBtn btn btn-category px-8 py-2 rounded-md hover:text-white hover:bg-[#0E7A81]">
                 <img class="w-6"src="${pet.category_icon}"/>${pet.category}
             </button>
         </div>
@@ -42,21 +39,20 @@ showButtonCategory()
 
 
 
- //////////////////// * Sort by price button ////////////////////////////
-//  const sortPriceBtn = async (id)  => {
+//////////////////////////// * sort by price. /////////////////////;    
+// const sortPriceBtn = async(a) => {                                         //problem: sort by price
 //     const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pets`)
-//     const data = await res.json();
-//     console.log(data.pets);
-//  }
-
-
-
+//     const data = await res.json()
+//     const sorPriceLoad = data.pets;
+//     const sortPriceAllData = sorPriceLoad.sort((a, b) => {
+//         return b - a;
+//     });
+// };
 
  //////////////////// * default all card ///////////////////////////////
  //////////////////// * (innerHtml = card > with ternary use in the card )
  //////////////////// * innerHtml = card > with ternary use in the card
  //////////////////// * innerHtml = card inside button > like, adopt , details.
-
 
     const PetsCard = async() => {
         const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pets`)
@@ -67,62 +63,53 @@ showButtonCategory()
     
     const displayAllPetsCard = (items) => {
             const cardContainer = document.getElementById('card-container');
-            
-    // problem here: 
-              // sort by button;
-            //   const petId = [
-            //     {name: "pet_name"},
-            //     {price:  1200},
-            //  ];
-             
-            //  petId.sort((a, b) => a.name - b.price)
-             
 
             cardContainer.innerHTML = "";
             items.forEach(item => {
-            // console.log(item);
 
-            
+                // sortPriceAllData(item.price);    // problem: item price.
+
                 const allCardDiv = document.createElement('div')
                 allCardDiv.innerHTML = `
         
                     <div class=" rounded-md border bg-base-100 p-4">
                             <figure>
-                                <img class="w-full"
+                                <img class="w-full rounded-md"
                                 src="${item.image}"
                                 alt="Shoes" />
                             </figure>
-                            
-                        <div class="my-4">
-    
-                                    ${item.pet_name === null || item.pet_name === undefined ? 'Not available:' :
-                                    `<h2 class="card-title">${item.pet_name}</h2>`}
-    
-                                    ${item.breed === null || item.breed === undefined ? 'Not available:' :
-                                    `<p class="flex items-center"> 
-                                        <i class='text-xl pr-2 bx bx-grid-small'></i>
-                                        Breed: ${item.breed}</p>`}
-    
-                                        ${item.date_of_birth === null || item.date_of_birth === undefined ? 'Not available:' :
-                                    `<p class="flex items-center">
-                                        <i class='text-xl pr-2 bx bxs-bookmark-star'></i> 
-                                        Birth: ${item.date_of_birth}</p>`}
-                                        
-                                    ${item.gender === null || item.gender === undefined ? 'Not available:' :
-                                    `<p class="flex items-center">
-                                        <i class='text-xl pr-2 bx bx-female-sign'></i>
-                                        Gender: ${item.gender}</p>`}
-    
-                                    ${item.price === null || item.price === undefined ? 'Not available:' :
-                                    `<p class="flex items-center"> 
-                                        <i class='text-xl pr-2 bx bx-money-withdraw'></i>
-                                        Price: ${item.price}</p>`}
-                    </div>
+                        
+                    <div class="my-4">
+
+                                ${item.pet_name === null || item.pet_name === undefined ? 'Not available:' :
+                                `<h2 class="card-title">${item.pet_name}</h2>`}
+
+                                ${item.breed === null || item.breed === undefined ? 'Not available:' :
+                                `<p class="flex items-center"> 
+                                    <i class='text-xl pr-2 bx bx-grid-small'></i>
+                                    Breed: ${item.breed}</p>`}
+
+                                    ${item.date_of_birth === null || item.date_of_birth === undefined ? 'Not available:' :
+                                `<p class="flex items-center">
+                                    <i class='text-xl pr-2 bx bxs-bookmark-star'></i> 
+                                    Birth: ${item.date_of_birth}</p>`}
+                                    
+                                ${item.gender === null || item.gender === undefined ? 'Not available:' :
+                                `<p class="flex items-center">
+                                    <i class='text-xl pr-2 bx bx-female-sign'></i>
+                                    Gender: ${item.gender}</p>`}
+
+                                ${item.price === null || item.price === undefined ? 'Not available:' :
+                                `<p class="flex items-center"> 
+                                    <i class='text-xl pr-2 bx bx-money-withdraw'></i>
+                                    Price: ${item.price}</p>`}
+                </div>
     
                         <div class="card-actions flex justify-between">
                             <button
                             onclick="likeBtn('${item.image}')"
-                            class="border font-semibold py-1 text-[#0E7A81] px-3 rounded-md"><i class='bx bx-like'></i></button>
+                            class="border font-semibold py-1 text-[#0E7A81] px-3 rounded-md">
+                            <i class=' bx bx-like'></i></button>
     
                             <button 
                             onclick="adoptBtn()"
@@ -142,39 +129,59 @@ PetsCard()
         
         
 
-
-
 //*///////// ( card ====> click > dog, cat, rabbit, bird ) /////////////
 ////////////////////////////////////////////// * * spinner.
+////////////////////////////////////////////// * * button active class remove
 ////////////////////////////////////////////// * undefine data = condition 
 ////////////////////////////////////////////// * innerHtml = card > with ternary use in the card
 ////////////////////////////////////////////// * card inside button > like, adopt , details.
+
+// remove active class on the buttons;
+const removeActiveClass = () => {
+    const buttons = document.getElementsByClassName('btn-category')
+    // console.log(buttons);
+    for(const btn of buttons){
+        btn.classList.remove('active')
+    }
+    
+}
+
+
 
 
 const loadCardOnClick = async (id) => {
     const spinner = document.getElementById('spinner');
     const mainContainer = document.getElementById('main-container');
 
+    // spinner.
     spinner.classList.remove('hidden')
     mainContainer.classList.add('hidden')
-
 
     setTimeout(() => {
         spinner.classList.add('hidden')
         mainContainer.classList.remove('hidden')
-
     }, 1000);
-
     
+
+    // fetch button to card.
     const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
     const data = await res.json()
+    // active Btn
+    {
+        removeActiveClass();
+        const activeBtn = document.getElementById(`btn-${id}`)
+        activeBtn.classList.add('active') 
+    }
     showAllCard(data.data)
 }
+
+
+
         const showAllCard = (cards) => {
             const cardContainer = document.getElementById('card-container')
             cardContainer.innerHTML = "";
 
-        // undefine data condition:                                                  // problem : undefine content.
+        // undefine data condition:                                                 
            if(cards.length === 0){
                 cardContainer.classList.remove('grid')
                 cardContainer.innerHTML = `
@@ -201,7 +208,7 @@ const loadCardOnClick = async (id) => {
         
             <div class=" rounded-md border bg-base-100 p-4">
                         <figure>
-                        <img class="w-full"
+                        <img class="w-full rounded-md"
                             src="${card.image}"
                             alt="Shoes" />
                         </figure>
